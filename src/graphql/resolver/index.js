@@ -1,5 +1,5 @@
 const queryResolver = require('./queryResolver');
-const mutationResolver = require('./mutationResolver');
+const mutationResolver = require('./mutation');
 
 const resolvers = {
     ...queryResolver,

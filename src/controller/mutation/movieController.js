@@ -1,6 +1,9 @@
-const Movie = require("./../model/movieModels");
+const Movie = require("../../model/movieModel");
+const { GraphQLError } =  require('graphql');
+const authorize = require('./../../utils/authorization')
 
 const postMovieController = async (parent, args, context, info) => {
+  authorize(context.user);
   const input = {
     title: args.input.title,
     ratings: args.input.ratings,
@@ -22,6 +25,7 @@ const postMovieController = async (parent, args, context, info) => {
 };
 
 const updateMovieController = async (parent, args, context, info) => {
+  authorize(context.user);
   try {
     const updatedMovie = await Movie.findByIdAndUpdate(
       args.id,
@@ -38,6 +42,7 @@ const updateMovieController = async (parent, args, context, info) => {
 };
 
 const deleteMovieController = async (parent, args, context, info) => {
+  authorize(context.user);
   try {
     const deleteMovie = await Movie.findByIdAndDelete(args.id);
 
